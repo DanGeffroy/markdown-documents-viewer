@@ -10,5 +10,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^1.4.6"
+  },
+  "dependencies": {
+    "github-markdown-css": "^2.4.1"
   }
 }

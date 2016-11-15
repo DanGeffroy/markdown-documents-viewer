@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI";
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: linear-gradient(rgb(242, 244, 244), rgb(230, 235, 237));
+}
+
+div.viewer {
+  padding: 33px;
+  overflow: auto;
+  height: 100%;
+}
+
+.markdown-body {
+  background: rgb(255, 255, 255);
+  padding: 45px;
+  word-wrap: break-word;
+  width: 980px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgb(199, 199, 199);
+  min-height: 1147px;
+}
