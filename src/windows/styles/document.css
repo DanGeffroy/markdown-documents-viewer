@@ -16,8 +16,19 @@ body {
   background: linear-gradient(rgb(242, 244, 244), rgb(230, 235, 237));
 }
 
+.ui-main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-toolbar {
+  height: 38px;
+  background: rgb(255, 0, 0);
+}
+
 div.viewer {
-  padding: 33px;
+  padding: 33px 0;
   overflow: auto;
   height: 100%;
 }
@@ -26,7 +37,7 @@ div.viewer {
   background: rgb(255, 255, 255);
   padding: 45px;
   word-wrap: break-word;
-  width: 980px;
+  max-width: 980px;
   margin: 0 auto;
   box-shadow: 0 0 10px rgb(199, 199, 199);
   min-height: 1147px;

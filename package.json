@@ -12,6 +12,7 @@
     "electron": "^1.4.6"
   },
   "dependencies": {
-    "github-markdown-css": "^2.4.1"
+    "github-markdown-css": "^2.4.1",
+    "showdown": "^1.5.0"
   }
 }
