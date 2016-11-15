@@ -16,6 +16,10 @@ body {
   background: linear-gradient(rgb(242, 244, 244), rgb(230, 235, 237));
 }
 
+body.fullscreen {
+  background: linear-gradient(rgb(27, 27, 27), rgb(0, 0, 0));
+}
+
 .ui-main {
   height: 100%;
   display: flex;
@@ -41,4 +45,8 @@ div.viewer {
   margin: 0 auto;
   box-shadow: 0 0 10px rgb(199, 199, 199);
   min-height: 1147px;
+}
+
+.fullscreen .markdown-body {
+  box-shadow: 0 0 10px  rgb(56, 52, 52);;
 }

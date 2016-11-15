@@ -2,9 +2,11 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Markdown documents viewer</title>
     <link href="../styles/document.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../../node_modules/github-markdown-css/github-markdown.css">
+    <script>
+      var filePath = location.search.substr(1)
+    </script>
   </head>
   <body>
     <main class="ui-main">
@@ -14,23 +16,34 @@
       </div>
     </main>
     <script>
+      const electron = require('electron');
       const fs = require('fs');
       const path = require('path');
       const showdown  = require('showdown');
       const converter = new showdown.Converter();
       const viewer = document.getElementById('js-markdown-body');
 
-      fs.readFile(path.join(__dirname, '../../resources/document.md'), 'utf8', function (err, data) {
+      fs.readFile(filePath, 'utf8', function (err, data) {
         if (err) {
           return console.log(err);
         }
+
         viewer.innerHTML = converter.makeHtml(data);
-        var items = document.getElementsByTagName("img");
-for (var i = items.length; i--;) {
-    var img = items[i];
-    img.src='../../resources/'+img.getAttribute('src');
-}
+        /*var items = document.getElementsByTagName("img");
+        for (var i = items.length; i--;) {
+            var img = items[i];
+            img.src='../../resources/'+img.getAttribute('src');
+        }*/
       });
+
+      // events
+      electron.ipcRenderer.on('fullscreen', (event, isFullscreen) => {
+        if (isFullscreen) {
+          document.body.classList.add('fullscreen')
+        } else {
+          document.body.classList.remove('fullscreen')
+        }
+      })
     </script>
   </body>
 </html>
