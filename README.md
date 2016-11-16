@@ -11,7 +11,7 @@ Simply run the following commands :
 npm i
 
 # Run the app
-npm start.
+npm start
 ```
 
 ## Licence
