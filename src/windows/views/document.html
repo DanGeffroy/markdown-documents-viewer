@@ -23,18 +23,20 @@
       const converter = new showdown.Converter();
       const viewer = document.getElementById('js-markdown-body');
 
-      fs.readFile(filePath, 'utf8', function (err, data) {
-        if (err) {
-          return console.log(err);
-        }
+      function readFile() {
+        fs.readFile(filePath, 'utf8', function (err, data) {
+          if (err) {
+            return console.log(err);
+          }
 
-        viewer.innerHTML = converter.makeHtml(data);
-        /*var items = document.getElementsByTagName("img");
-        for (var i = items.length; i--;) {
-            var img = items[i];
-            img.src='../../resources/'+img.getAttribute('src');
-        }*/
-      });
+          viewer.innerHTML = converter.makeHtml(data);
+          /*var items = document.getElementsByTagName("img");
+          for (var i = items.length; i--;) {
+              var img = items[i];
+              img.src='../../resources/'+img.getAttribute('src');
+          }*/
+        });
+      }
 
       // events
       electron.ipcRenderer.on('fullscreen', (event, isFullscreen) => {
@@ -43,6 +45,10 @@
         } else {
           document.body.classList.remove('fullscreen')
         }
+      })
+
+      electron.ipcRenderer.on('reload-document', (event) => {
+        readFile()
       })
     </script>
   </body>

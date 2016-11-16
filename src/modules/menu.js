@@ -82,23 +82,11 @@ const appMenuTemplate = [
     label: 'View',
     submenu: [
       {
-        label: 'Developer',
-        submenu: [
-          {
-            label: 'Reload window',
-            accelerator: 'CmdOrCtrl+R',
-            click (item, focusedWindow) {
-              if (focusedWindow) focusedWindow.reload()
-            }
-          },
-          {
-            label: 'Toggle Developer Tools',
-            accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-            click (item, focusedWindow) {
-              if (focusedWindow) focusedWindow.webContents.toggleDevTools()
-            }
-          }
-        ]
+        label: 'Reload document',
+        accelerator: 'CmdOrCtrl+R',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.webContents.send('reload-document', true)
+        }
       },
       {
         type: 'separator'
@@ -111,6 +99,28 @@ const appMenuTemplate = [
       },
       {
         role: 'zoomout'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Developer',
+        submenu: [
+          {
+            label: 'Reload window',
+            accelerator: 'CmdOrCtrl+Shift+R',
+            click (item, focusedWindow) {
+              if (focusedWindow) focusedWindow.reload()
+            }
+          },
+          {
+            label: 'Toggle Developer Tools',
+            accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+            click (item, focusedWindow) {
+              if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+            }
+          }
+        ]
       },
       {
         type: 'separator'
