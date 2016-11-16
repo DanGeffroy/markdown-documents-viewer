@@ -11,7 +11,7 @@ Simply run the following commands :
 npm i
 
 # Run the app
-node_modules/.bin/electron .
+npm start.
 ```
 
 ## Licence
