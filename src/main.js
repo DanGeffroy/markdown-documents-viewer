@@ -1,17 +1,15 @@
 'use strict';
 const {app, BrowserWindow, Menu} = require('electron')
 
-const DocumentsWindowManager = require('./windows/controllers/document')
-const appMenu = require('./modules/menu')
-
-let windowManager = new DocumentsWindowManager()
+const DocumentsManager = require('./services/documents-manager')
+const appMenu = require('./services/menu')
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   Menu.setApplicationMenu(appMenu)
-  windowManager.openNewFile()
+  DocumentsManager.openNewFile()
 })
 
 // Quit when all windows are closed.
@@ -26,8 +24,8 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (!windowManager.hasOpenedDocuments()) {
-    windowManager.openNewFile()
+  if (!DocumentsManager.hasOpenedDocuments()) {
+    DocumentsManager.openNewFile()
   }
 })
 

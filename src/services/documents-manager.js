@@ -4,12 +4,13 @@ const {BrowserWindow, dialog, ipcMain} = require('electron')
 const path = require('path')
 const url = require('url')
 
-class DocumentsWindowManager {
-  constructor() {
-    this.documentWindows = []
-  }
+let documentWindows = []
 
-  openNewFile() {
+const documentsManager = {
+  /**
+   * Shows the OpenFileDialog and creates a new DocumentWindow.
+   */
+  'openNewFile': function () {
     dialog.showOpenDialog({
       properties: ['openFile'],
       filters: [
@@ -24,9 +25,11 @@ class DocumentsWindowManager {
         })
       }
     })
-  }
-
-  createNewWindow(filePath) {
+  },
+  /**
+   * Creates a nex DocumentWindow for the file specified.
+   */
+  'createNewWindow': function (filePath) {
     const newDocWindow = new BrowserWindow({
       width: 1082,
       height: 655,
@@ -52,25 +55,27 @@ class DocumentsWindowManager {
     })
 
     newDocWindow.on('closed', () => {
-      let index = this.documentWindows.indexOf(newDocWindow)
+      let index = documentWindows.indexOf(newDocWindow)
       if (index > -1) {
-        this.documentWindows.splice(index, 1);
+        documentWindows.splice(index, 1);
       }
     })
 
     newDocWindow.loadURL(url.format({
-      pathname: path.join(__dirname, '../views/document.html'),
+      pathname: path.join(__dirname, '../windows/views/document.html'),
       protocol: 'file:',
       slashes: true,
       search: filePath
     }))
 
-    this.documentWindows.push(newDocWindow);
-  }
-
-  hasOpenedDocuments() {
-    return this.documentWindows.length > 0
+    documentWindows.push(newDocWindow);
+  },
+  /**
+   * Returns true if documents are openned.
+   */
+  'hasOpenedDocuments': function() {
+    return documentWindows.length > 0
   }
 }
 
-module.exports = DocumentsWindowManager;
+module.exports = documentsManager;

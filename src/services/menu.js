@@ -1,5 +1,6 @@
 'use strict';
 const {app, Menu} = require('electron')
+const DocumentsManager = require('./documents-manager')
 
 const appMenuTemplate = [
   {
@@ -8,7 +9,7 @@ const appMenuTemplate = [
       {
         label: 'Open...',
         accelerator: 'CmdOrCtrl+O',
-        role: 'open'
+        click () { DocumentsManager.openNewFile() }
       },
       {
         label: 'Open from GitHub...',
